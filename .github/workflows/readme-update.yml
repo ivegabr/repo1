@@ -25,7 +25,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.DOCS_TOKEN }}
         run: |
-          git clone git clone https://ivegabr:${GITHUB_TOKEN}@github.com/ivegabr/docs-test.git
+          git clone https://ivegabr:${GITHUB_TOKEN}@github.com/ivegabr/docs-test.git
           cd docs-test
           git checkout -b update-from-repo1 || git checkout update-from-repo1
           cd ..
