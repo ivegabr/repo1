@@ -23,7 +23,7 @@ jobs:
       # Step 3: Clone the Docusaurus repository
       - name: Clone Docusaurus Repository
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.DOCS_TOKEN }}
         run: |
           git clone git@github.com:ivegabr/docs-test.git
           cd docs-test
@@ -49,7 +49,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.DOCS_TOKEN }}
           commit-message: "Automated update of README from repo1"
           branch: update-from-repo1
           title: "Automated update of README from repo1"
