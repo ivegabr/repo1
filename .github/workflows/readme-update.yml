@@ -45,11 +45,6 @@ jobs:
           git commit -m "Automated update of README from repo1"
           git push -f origin update-from-repo1
 
-      - name: Push Changes to Docusaurus Repo
-        run: |
-          cd docs-test
-          git push origin update-from-docs-test
-
       # Step 6: Create a pull request in the Docusaurus repository
 
       - name: Create Pull Request
