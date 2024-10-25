@@ -53,6 +53,6 @@ jobs:
         run: |
           cd docs-test
           curl -X POST -H "Authorization: token ${GITHUB_TOKEN}" \
-            -H "Accept: application/vnd.github.v3+json" \
-            -d '{"title":"Automated update of README from repo1", "body":"This PR updates the Docusaurus documentation with the latest README from repo1.",, "head":"update-from-repo1","base":"main"}' \
-            https://api.github.com/repos/ivegabr/docs-test/pulls
+          -H "Accept: application/vnd.github.v3+json" \
+          -d '{"title":"Automated update of README from repo1", "body":"This PR updates the Docusaurus documentation with the latest README from repo1.",, "head":"update-from-repo1","base":"main"}' \
+          https://api.github.com/repos/ivegabr/docs-test/pulls
