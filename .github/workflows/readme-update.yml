@@ -38,7 +38,7 @@ jobs:
       # Step 5: Commit changes to the new branch in Docusaurus repository
       - name: Commit Changes
         run: |
-          cd docusaurus-repo
+          cd docs-test
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add src/pages/foo/repo1.md
