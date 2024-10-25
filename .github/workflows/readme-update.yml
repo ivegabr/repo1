@@ -1,0 +1,57 @@
+name: Update Docusaurus Documentation
+
+on:
+  push:
+    paths:
+      - 'README.md'
+
+jobs:
+  update-docs:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Check out the code from the triggering repository
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      # Step 2: Copy or transform README to make it compatible with Docusaurus, if necessary
+      - name: Transform README for Docusaurus
+        run: |
+          mkdir transformed
+          # Adjust this line to copy or transform README.md as needed for Docusaurus
+          cp README.md transformed/README.md
+
+      # Step 3: Clone the Docusaurus repository
+      - name: Clone Docusaurus Repository
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git clone git@github.com:ivegabr/docs-test.git
+          cd docs-test
+          git checkout -b update-from-repo1 || git checkout update-from-repo1
+          cd ..
+
+      # Step 4: Copy the transformed README to the Docusaurus `docs` folder
+      - name: Copy README to Docusaurus Repo
+        run: |
+          cp transformed/README.md docs-test/src/foo/repo1.md
+
+      # Step 5: Commit changes to the new branch in Docusaurus repository
+      - name: Commit Changes
+        run: |
+          cd docusaurus-repo
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/foo/repo1.md
+          git commit -m "Automated update of README from repo1"
+          git push origin update-from-repo1
+
+      # Step 6: Create a Pull Request to merge the branch into main
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Automated update of README from repo1"
+          branch: update-from-repo1
+          title: "Automated update of README from repo1"
+          body: "This PR updates the Docusaurus documentation with the latest README from repo1."
+          base: main
