@@ -45,13 +45,19 @@ jobs:
           git commit -m "Automated update of README from repo1"
           git push origin update-from-repo1
 
-      # Step 6: Create a Pull Request to merge the branch into main
+      - name: Push Changes to Docusaurus Repo
+        run: |
+          cd docs-test
+          git push origin update-from-docs-test
+
+      # Step 6: Create a pull request in the Docusaurus repository
+
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
-        with:
-          token: ${{ secrets.DOCS_TOKEN }}
-          commit-message: "Automated update of README from repo1"
-          branch: update-from-repo1
-          title: "Automated update of README from repo1"
-          body: "This PR updates the Docusaurus documentation with the latest README from repo1."
-          base: main
+        env:
+          GITHUB_TOKEN: ${{ secrets.DOCS_TOKEN }}
+        run: |
+          cd docs-test
+          curl -X POST -H "Authorization: token ${GITHUB_TOKEN}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            -d '{"title":"Automated update of README from repo1", "body":"This PR updates the Docusaurus documentation with the latest README from repo1.",, "head":"update-from-repo1","base":"main"}' \
+            https://api.github.com/repos/ivegabr/docs-test/pulls
