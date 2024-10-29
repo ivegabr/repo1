@@ -4,3 +4,5 @@
 
 This is a test repo for docs automation.
 Updating this line.
+
+New lines added.
