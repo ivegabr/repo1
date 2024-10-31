@@ -9,7 +9,6 @@ Prepare the environment by following the instructions in [basic requirements](..
 Clone the project. Then run the following from the Enveloping project's root directory
 
 -   `yarn install && yarn prepare`.
--   Move [here](../rsknode/README.md) (optional: it runs an RSK node)
 
 ## Deploy contracts locally
 
@@ -48,7 +47,7 @@ We use `truffle` for deploying contracts.
 
 `npx truffle migrate --network rsktestnet` (disclaimer: to use testnet, you should have an unlocked account with funds or configure it in `truffle.js`).
 
-We have already deployed these contracts on Testnet. See [here](#testnet-contracts)
+We have already deployed these contracts on Testnet.
 
 ## Custom worker replenish function in the Relay Server
 
@@ -66,7 +65,7 @@ To implement and use your own replenish strategy:
 In order to run an Enveloping instance in Testnet, clone the project then run the following from the project's root directory:
 
 1. Create the project home folder, in this folder the jsrelay databases will be placed: `mkdir enveloping_relay`
-2. In a terminal run `node dist/src/cli/commands/enveloping.js relayer-run --rskNodeUrl "http://localhost:4444" --relayHubAddress=<RELAY_HUB_CONTRACT_ADDRESS> --deployVerifierAddress=<DEPLOY_VERIFIER_CONTRACT_ADDRESS> --relayVerifierAddress=<RELAY_VERIFIER_CONTRACT_ADDRESS> --versionRegistryAddress=<VERSION_REGISTRY_CONTRACT_ADDRESS> --url <RELAY_URL> --port 8090 --workdir enveloping_relay --checkInterval 30000` where `<RELAY_HUB_CONTRACT_ADDRESS>` is the address for the relayHub you are using in the current network [(see Testnet Contracts section)](#c02.1), `<RELAY_URL>` in most cases will be `http://localhost`, and the server will be reachable in `<RELAY_URL>:port` unless `<RELAY_URL>` already defines a port (e.g, if `<RELAY_URL>` is `http://localhost:8090/jsrelay`)
+2. In a terminal run `node dist/src/cli/commands/enveloping.js relayer-run --rskNodeUrl "http://localhost:4444" --relayHubAddress=<RELAY_HUB_CONTRACT_ADDRESS> --deployVerifierAddress=<DEPLOY_VERIFIER_CONTRACT_ADDRESS> --relayVerifierAddress=<RELAY_VERIFIER_CONTRACT_ADDRESS> --versionRegistryAddress=<VERSION_REGISTRY_CONTRACT_ADDRESS> --url <RELAY_URL> --port 8090 --workdir enveloping_relay --checkInterval 30000` where `<RELAY_HUB_CONTRACT_ADDRESS>` is the address for the relayHub you are using in the current network, `<RELAY_URL>` in most cases will be `http://localhost`, and the server will be reachable in `<RELAY_URL>:port` unless `<RELAY_URL>` already defines a port (e.g, if `<RELAY_URL>` is `http://localhost:8090/jsrelay`)
 3. In another terminal run `curl http://localhost:8090/getaddr` which will return some JSON with information of the running jsRelay Server, for example:
 
 ```json
