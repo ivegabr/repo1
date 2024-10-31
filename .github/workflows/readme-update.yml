@@ -36,6 +36,8 @@ jobs:
           echo "title: Introduction" >> transformed/README.md
           echo "---" >> transformed/README.md
           echo "" >> transformed/README.md
+          echo "# Introduction" >> transformed/README.md
+          echo "" >> transformed/README.md
           echo ":::info[Note]" >> transformed/README.md
           echo "This content is automatically updated from the repository, in this case from the README.md file. Notice that the links to other documents are working properly." >> transformed/README.md
           echo ":::" >> transformed/README.md
