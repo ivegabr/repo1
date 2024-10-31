@@ -14,11 +14,24 @@ jobs:
         uses: actions/checkout@v2
 
       # Step 2: Copy or transform README to make it compatible with Docusaurus, if necessary
+ 
       - name: Transform README for Docusaurus
         run: |
           mkdir transformed
-          # Adjust this line to copy or transform README.md as needed for Docusaurus
-          cp README.md transformed/README.md
+          # Add header text and prepend it to README.md
+          echo "---" > transformed/README.md
+          echo "sidebar_position: 2" >> transformed/README.md
+          echo "title: Introduction" >> transformed/README.md
+          echo "---" >> transformed/README.md
+          echo "" >> transformed/README.md
+          echo "# Introduction" >> transformed/README.md
+          echo "" >> transformed/README.md
+          echo ":::info[Note]" >> transformed/README.md
+          echo "This content is automatically updated from the repository, in this case from the README.md file. Notice that the links to other documents are working properly." >> transformed/README.md
+          echo ":::" >> transformed/README.md
+          echo "" >> transformed/README.md
+          # Append the original README content after the header text
+          cat README.md >> transformed/README.md
 
       # Step 3: Clone the Docusaurus repository
       - name: Clone Docusaurus Repository
