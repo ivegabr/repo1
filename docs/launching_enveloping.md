@@ -1,6 +1,6 @@
 # Launching
 
-This is something that need to be changed.
+This is is something that was changed.
 
 ## Prerequisites
 
