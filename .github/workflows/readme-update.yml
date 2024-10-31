@@ -46,7 +46,7 @@ jobs:
       # Step 4: Copy the transformed README to the Docusaurus `docs` folder
       - name: Copy README to Docusaurus Repo
         run: |
-          cp transformed/README.md docs-test/src/pages/foo/repo1.md
+          cp transformed/README.md docs-test/docs/rif-relay/readme.md
 
       # Step 5: Commit changes to the new branch in Docusaurus repository
       - name: Commit Changes
