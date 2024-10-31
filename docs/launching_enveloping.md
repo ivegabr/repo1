@@ -1,7 +1,5 @@
 # Launching
 
-test.
-test.
 
 ## Prerequisites
 
