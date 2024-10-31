@@ -1,3 +1,10 @@
+---
+id: my-doc-id
+title: My document title
+description: My document description
+slug: /my-custom-url
+---
+
 # Test Repo 1
 
 ## Intro
