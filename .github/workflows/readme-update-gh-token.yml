@@ -17,14 +17,13 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      # Step 1: Clone the Docusaurus Repository
+      # Step 1: Clone the Docusaurus Repository with Authentication
       - name: Clone Docusaurus Repository
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git clone https://github.com/ivegabr/docs-test.git
+          git clone https://x-access-token:${GITHUB_TOKEN}@github.com/ivegabr/docs-test.git
           cd docs-test
-          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/ivegabr/docs-test.git
           git checkout -b update-from-docs || git checkout update-from-docs
           cd ..
 
