@@ -19,6 +19,7 @@ jobs:
           repository: ivegabr/docs-test
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0  # Ensures all branches are fetched for commit/push operations
+          ref: main
 
       # Step 2: Create and Switch to Update Branch
       - name: Create and Switch to Update Branch
