@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       # Step 1: Clone the Docusaurus Repository
       - name: Clone Docusaurus Repository
@@ -22,6 +24,7 @@ jobs:
         run: |
           git clone https://github.com/ivegabr/docs-test.git
           cd docs-test
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/ivegabr/docs-test.git
           git checkout -b update-from-docs || git checkout update-from-docs
           cd ..
 
@@ -56,7 +59,7 @@ jobs:
           echo ":::" >> transformed/basic_requirements.md
           echo "" >> transformed/basic_requirements.md
           cat docs/basic_requirements.md >> transformed/basic_requirements.md
-          cp transformed/basic_requirements.md docs-test/docs/rif-relay/docs/basic_requirements.md
+          cp transformed/basic_requirements.md docs-test/docs/rif-relay/basic_requirements.md
 
           # Process development_guide.md
           echo "---" > transformed/development_guide.md
@@ -69,7 +72,7 @@ jobs:
           echo ":::" >> transformed/development_guide.md
           echo "" >> transformed/development_guide.md
           cat docs/development_guide.md >> transformed/development_guide.md
-          cp transformed/development_guide.md docs-test/docs/rif-relay/docs/development_guide.md
+          cp transformed/development_guide.md docs-test/docs/rif-relay/development_guide.md
 
           # Process launching_enveloping.md
           echo "---" > transformed/launching_enveloping.md
@@ -82,10 +85,12 @@ jobs:
           echo ":::" >> transformed/launching_enveloping.md
           echo "" >> transformed/launching_enveloping.md
           cat docs/launching_enveloping.md >> transformed/launching_enveloping.md
-          cp transformed/launching_enveloping.md docs-test/docs/rif-relay/docs/launching_enveloping.md
+          cp transformed/launching_enveloping.md docs-test/docs/rif-relay/launching_enveloping.md
 
       # Step 3: Commit and Push Changes to Docusaurus Repository
       - name: Commit and Push Changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           cd docs-test
           git config user.name "github-actions[bot]"
