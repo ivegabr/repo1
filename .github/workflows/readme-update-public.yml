@@ -17,11 +17,11 @@ jobs:
 
       # Step 1: Clone the Public Docusaurus Repository
       - name: Clone Docusaurus Repository
-        run: |
-          git clone https://github.com/ivegabr/docs-test.git
-          cd docs-test
-          git checkout -b update-from-docs || git checkout update-from-docs
-          cd ..
+        uses: actions/checkout@v2
+        with:
+          repository: ivegabr/docs-test
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: main
 
       # Step 2: Transform Each File and Copy to Docusaurus Repository
       - name: Transform Files for Docusaurus
@@ -41,7 +41,7 @@ jobs:
           echo ":::" >> transformed/README.md
           echo "" >> transformed/README.md
           cat README.md >> transformed/README.md
-          cp transformed/README.md docs-test/docs/rif-relay/readme.md
+          cp transformed/README.md docs/rif-relay/readme.md
 
           # Process basic_requirements.md
           echo "---" > transformed/basic_requirements.md
@@ -54,7 +54,7 @@ jobs:
           echo ":::" >> transformed/basic_requirements.md
           echo "" >> transformed/basic_requirements.md
           cat docs/basic_requirements.md >> transformed/basic_requirements.md
-          cp transformed/basic_requirements.md docs-test/docs/rif-relay/basic_requirements.md
+          cp transformed/basic_requirements.md docs/rif-relay/basic_requirements.md
 
           # Process development_guide.md
           echo "---" > transformed/development_guide.md
@@ -67,7 +67,7 @@ jobs:
           echo ":::" >> transformed/development_guide.md
           echo "" >> transformed/development_guide.md
           cat docs/development_guide.md >> transformed/development_guide.md
-          cp transformed/development_guide.md docs-test/docs/rif-relay/development_guide.md
+          cp transformed/development_guide.md docs/rif-relay/development_guide.md
 
           # Process launching_enveloping.md
           echo "---" > transformed/launching_enveloping.md
@@ -80,19 +80,18 @@ jobs:
           echo ":::" >> transformed/launching_enveloping.md
           echo "" >> transformed/launching_enveloping.md
           cat docs/launching_enveloping.md >> transformed/launching_enveloping.md
-          cp transformed/launching_enveloping.md docs-test/docs/rif-relay/launching_enveloping.md
+          cp transformed/launching_enveloping.md docs/rif-relay/launching_enveloping.md
 
-      # Step 3: Commit and Push Changes to the Public Docusaurus Repository
+      # Step 3: Commit and Push Changes to the Docusaurus Repository
       - name: Commit and Push Changes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          cd docs-test
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add docs/rif-relay/*.md 
           git commit -m "Automated update of documentation files"
-          git push -u origin update-from-docs --force
+          git push -u origin HEAD --force
 
       # Step 4: Create a Pull Request in the Docusaurus Repository
       - name: Create Pull Request
